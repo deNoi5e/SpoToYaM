@@ -1,0 +1,5 @@
+python-dotenv~=1.0.0
+pydantic~=2.5.3
+yandex-music~=2.2.0
+pydantic-settings~=2.1.0
+spotipy~=2.23.0
