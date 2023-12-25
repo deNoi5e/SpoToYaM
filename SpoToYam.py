@@ -88,18 +88,19 @@ else:
 # Разобраться с difference
 query_for_delete = playlist_difference.add_delete(from_=1, to=2)
 
-# Очистим плейлист, перед работой с ним
-# client.users_playlists_delete_track(kind=edited_playlist.kind,
-#                                     from_=0,
-#                                     to=edited_playlist.track_count,
-#                                     user_id=client.me.account.uid,
-#                                     revision=edited_playlist.revision)
-#
-# update_playlist_revision()
 
 if not os.path.exists('exported.csv'):
     logging.fatal('Отсутствует файл .csv в директории.')
     sys.exit()
+
+# Очистим плейлист, перед работой с ним
+client.users_playlists_delete_track(kind=edited_playlist.kind,
+                                    from_=0,
+                                    to=edited_playlist.track_count,
+                                    user_id=client.me.account.uid,
+                                    revision=edited_playlist.revision)
+
+update_playlist_revision()
 
 list_parsed_track_from_spotify = parse_csv('exported.csv')
 exported_tracks = []
