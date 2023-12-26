@@ -9,6 +9,13 @@ COPY . /app
 # Копируем файл зависимостей (например, requirements.txt) в контейнер
 COPY requirements.txt /app/requirements.txt
 
+# Установим venv
+RUN pip install virtualenv
+
+RUN virtualenv venv
+
+RUN source venv/bin/activate
+
 # Устанавливаем зависимости
 RUN pip install -r requirements.txt
 
