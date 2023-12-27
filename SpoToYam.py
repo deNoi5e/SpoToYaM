@@ -36,28 +36,30 @@ def main():
         client_secret=config.client_token_spotify.get_secret_value())
     sp = spotipy.Spotify(auth_manager=auth_manager)
 
+    # Синхронизация лайков
+    if os.path.exists('liked_songs.csv'):
+        sync_likes_tracks(client)
+
     # Получаем плейлист из Spotify
     target_playlist_from_spotify = sp.playlist(config.spotify_playlist_id)
 
     generate_csv_playlist(target_playlist_from_spotify)
 
     # Проверим наличие нужного плейлиста и создадим при необходимости
-    if check_created_playlist(user_playlists, playlist_name):
-        client.users_playlists_create(title=playlist_name, visibility='private', user_id=client.me.account.uid)
-        logging.info("Плейлист создан")
-    else:
-        logging.info("Не нужно создавать плейлист")
+    check_and_create_playlist(client, playlist_name, user_playlists)
 
     # Очистим плейлист, перед работой с ним
     clean_playlist(client)
 
-    if not os.path.exists('exported.csv'):
-        logging.fatal('Отсутствует файл .csv в директории.')
-        sys.exit()
+    check_exported_csv()
 
     list_parsed_track_from_spotify = parse_csv('exported.csv')
     exported_tracks = []
 
+    add_tracks_to_playlist(client, edited_playlist, exported_tracks, list_parsed_track_from_spotify)
+
+
+def add_tracks_to_playlist(client, edited_playlist, exported_tracks, list_parsed_track_from_spotify):
     if list_parsed_track_from_spotify is not None:
         for track in list_parsed_track_from_spotify:
             exported_tracks.append(client.search(
@@ -66,7 +68,6 @@ def main():
                 type_='track',
                 playlist_in_best=False
             ))
-
     for adding_track in exported_tracks:
         if adding_track.tracks is None:
             logging.info('Трек не найден')
@@ -81,6 +82,20 @@ def main():
         )
         logging.info('Трек добавлен')
         update_playlist_revision()
+
+
+def check_exported_csv():
+    if not os.path.exists('exported.csv'):
+        logging.fatal('Отсутствует файл .csv в директории.')
+        sys.exit()
+
+
+def check_and_create_playlist(client, playlist_name, user_playlists):
+    if check_created_playlist(user_playlists, playlist_name):
+        client.users_playlists_create(title=playlist_name, visibility='private', user_id=client.me.account.uid)
+        logging.info("Плейлист создан")
+    else:
+        logging.info("Не нужно создавать плейлист")
 
 
 def clean_playlist(client):
@@ -136,6 +151,29 @@ def parse_csv(filename):
             data.append(combined_row)
 
     return data
+
+
+def sync_likes_tracks(client):
+    list_parsed_track_from_spotify = parse_csv('liked_songs.csv')
+    exported_tracks = []
+
+    if list_parsed_track_from_spotify is not None:
+        for track in list_parsed_track_from_spotify:
+            exported_tracks.append(client.search(
+                text=track,
+                nocorrect=True,
+                type_='track',
+                playlist_in_best=False
+            ))
+
+        for liked_track in exported_tracks:
+            if liked_track.tracks is None:
+                logging.info('Трек не найден')
+                continue
+            track_id = liked_track.tracks.results[0].id
+            client.users_likes_tracks_add(track_id)
+            logging.info('Трек лайкнут')
+        os.remove('liked_songs.csv')
 
 
 if __name__ == "__main__":
