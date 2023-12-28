@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     client_token_spotify: SecretStr
     client_id_spotify: SecretStr
     spotify_playlist_id: str
+    only_liked_sync: bool
 
     # Начиная со второй версии pydantic, настройки класса настроек задаются
     # через model_config
