@@ -1,0 +1,16 @@
+:root {
+    --content-max-width: 65rem;
+    --notice-tip-border-color: var(--color-accent);
+    --link-color: var(--theme-color);
+}
+
+.app-nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media (min-width: 900px) {
+    p, ul {
+        text-align: justify;
+    }
+}
