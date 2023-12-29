@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Goofy</title>
+        <meta name="description" content="SpoToYam - перенос плейлистов Spotify -> Yandex.Music" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+        <link rel="stylesheet" href="./style/base-theme.css" />
+        <link rel="stylesheet" href="./style/dark-theme.css" title="dark" />
+        <link rel="stylesheet alternative" href="./style/light-theme.css" title="light" />
+        <link rel="stylesheet" href="./style/custom.css" />
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@3/dist/docsify-themeable/style.min.css" />
+        <link rel="icon" href="./img/favicon.svg" type="image/svg" />
+    </head>
+    <body>
+        <div id="app">Загрузка...</div>
+        <script>
+            window.$docsify = {
+                name: 'spotoyam',
+                repo: 'https://github.com/deNoi5e/SpoToYaM',
+                homepage: 'README.md',
+                loadNavbar: true,
+                loadSidebar: true,
+                subMaxLevel: 3,
+                auto2top: true,
+                noEmoji: true,
+                search: {
+                    maxAge: 86400000,
+                    paths: 'auto',
+                    placeholder: 'Поиск',
+                    noData: 'Нет результатов',
+                    depth: 3,
+                },
+                copyCode: {
+                    buttonText: 'Копировать',
+                    errorText: 'Ошибка',
+                    successText: 'Скопировано',
+                },
+                darklightTheme: {
+                    defaultTheme: 'dark',
+                },
+                plugins: [
+                    function (hook, vm) {
+                        var footer = [
+                            '<footer>',
+                            '<hr>',
+                            '<div style="display: flex; justify-content: space-between;">',
+                            '<span>Powered by <a href="https://github.com/QingWei-Li/docsify" target="_blank">docsify</a></span>',
+                            '<div style="display: flex; flex-direction: column; align-items: flex-end;">',
+                            `<span><a href="https://github.com/Chimildic">Chimildic</a>, 2020 - ${new Date().getFullYear()}</span>`,
+                            '</div>',
+                            '</div>',
+                            '</footer>',
+                        ].join('');
+
+                        hook.afterEach(function (html) {
+                            return html + footer;
+                        });
+                    },
+                ],
+                alias: {
+                    '/func': '/reference/index.md',
+                },
+            };
+        </script>
+        <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+        <script src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@3/dist/docsify-themeable/main.min.js" type="text/javascript"></script>
+        <script src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@3/dist/docsify-themeable/index.min.js" type="text/javascript"></script>
+        <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
+        <script src="//unpkg.com/docsify-copy-code"></script>
+        <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+        <script src="./script/docsify-sidebar-collapse.js"></script>
+        <script src="./script/docsify-fix-pageload-scroll.js"></script>
+    </body>
+</html>
