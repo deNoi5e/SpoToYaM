@@ -1,62 +1,43 @@
-<p align="center">
-    <img width="40%" style="margin: 0" src="docs/img/logo.png">
-</p>
-<p align="center">
-    <h2>
-        <b>SpoToYam - Синхронизация плейлистов Spotify -> Yandex.Music</b>
-    </h2>
-    <center><a target="_blank" href="https://t.me/+Vw0iFSOJ1oliMGYy"><img alt="Автор" src="https://img.shields.io/badge/Telegram-Чат-blue?logo=telegram&logoColor=white"></a></center>
-</p>
+![SpoToYam Logo](docs/img/logo.png)
 
-<h1>Системные требования</h1>
+# SpoToYam - Синхронизация плейлистов Spotify -> Yandex.Music
 
-- <strong>Python >=3.9</strong>
-- <strong>Полученный токен [Yandex.Music](https://yandex-music.readthedocs.io/en/main/token.html)</strong>
-- <strong>Полученный токен и Id [Spotify](https://developer.spotify.com/dashboard/)</strong>
+[![Telegram Chat](https://img.shields.io/badge/Telegram-Чат-blue?logo=telegram&logoColor=white)](https://t.me/+Vw0iFSOJ1oliMGYy)
 
+## Системные требования
 
-<h1>Возможности</h1>
+- Python >=3.9
+- Полученный токен [Yandex.Music](https://yandex-music.readthedocs.io/en/main/token.html)
+- Полученный токен и Id [Spotify](https://developer.spotify.com/dashboard/)
 
-- <strong>Синхронизация выбранного плейлиста</strong>
-- <strong>Синхронизация лайков</strong>
+## Возможности
 
+- Синхронизация выбранного плейлиста
+- Синхронизация лайков
 
-<h1>Установка</h1>
+## Установка
 
 <details>
-<summary>Скачать репозиторий</summary><p>
+<summary>Скачать репозиторий</summary>
 
 ```bash
 git clone https://github.com/deNoi5e/SpoToYaM.git && cd SpoToYaM
-```
 
-Создать переменное окружение:
-
-```bash
+# Создать виртуальное окружение
 python3 -m venv SpoToYaM
-```
 
-Активировать его и установить зависимости:
-
-```bash
-python3 -m venv SpoToYaM
-```
-
-```bash
+# Активировать виртуальное окружение и установить зависимости
 source SpoToYaM/bin/activate
-```
-
-```bash
 pip install -r requirements.txt
-```
 
-Изменить имя файла .env.example на .env
+```
+Изменить имя файла `.env.example` на `.env`
 </details>
 
 <details>
 <summary>Заполнение файла .env</summary><p>
 
-```
+```dotenv
 # Токен Yandex.Music
 CLIENT_TOKEN_YANDEX =
 
@@ -82,7 +63,7 @@ ONLY_LIKED_SYNC = # True или False
 <details>
 <summary>Настройка плейлиста-приемника в Yandex.Music</summary></p>
 
-По умолчанию, при синхронизации плейлиста в Yandex.Music создается плейлист "Received from Spotify", который при следующем запуске скрипта будет пересоздан. Если требуется перенести несколько плейлистов - необходимо в SpoToYam.py оперерировать переменной playlist_name.
+По умолчанию, при синхронизации плейлиста в Yandex.Music создается плейлист "Received from Spotify", который при следующем запуске скрипта будет пересоздан. Если требуется перенести несколько плейлистов - необходимо в `SpoToYam.py` оперировать переменной `playlist_name`.
 
 </details>
 
