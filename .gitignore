@@ -167,3 +167,4 @@ cython_debug/
 /.idea/spotoyam.iml
 /.idea/vcs.xml
 exported.csv
+liked_songs.csv

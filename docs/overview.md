@@ -5,6 +5,7 @@
 <center>Выполните <a target="_blank" href="https://">подготовку</a> и перенесите свой <a target="_blank" href="https://">первый плейлист</center>
 </br>
 
-<center><a target="_blank" href="https://t.me/denoi5e"><img alt="Автор" src="https://img.shields.io/badge/Telegram-Чат-blue?logo=telegram&logoColor=white"></a></center>
+<center><a target="_blank" href="https://t.me/+Vw0iFSOJ1oliMGYy"><img alt="Автор" src="https://img.shields.io/badge/Telegram-Чат-blue?logo=telegram&logoColor=white"></a></center>
 
 ## Возможности
+Скрипт дает возможность переноса медиатеки из Spotify в Yandex.Music, включая треки из плейлиста "Мне нравится". При переносе из "Мне нравится" треки будут пролайканы в Yandex.Music.
